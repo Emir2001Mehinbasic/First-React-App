@@ -67,7 +67,7 @@ const App = () => {
         </header>
           <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <section className="all-movies">
-          <h2>ALL MOVIES</h2>
+          <h2 className='mt-[40px]'>ALL MOVIES</h2>
           {isLoading ? (
               <Spinner />
              ) : errorMessage ? (
