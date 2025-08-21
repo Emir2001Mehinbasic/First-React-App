@@ -17,7 +17,7 @@ export const updateSearchCount = async (searchTerm, movie) => {
             [Query.equal('searchTerm', searchTerm)]
         );
         if  (result.documents.length > 0) {
-            const doc = result.documents[0].id;
+            const doc = result.documents[0];
             await database.updateDocument(
                 DATABASE_ID,
                 COLLECTION_ID,
@@ -41,5 +41,19 @@ export const updateSearchCount = async (searchTerm, movie) => {
     }catch(error) {
         console.error('Error updating search count:', error);
         return;
+    }
+}
+
+export const getTrendingMovies = async () => {
+    try{
+        const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
+            Query.limit(5),
+            Query.orderDesc('count'),
+        ])
+        return result.documents
+
+    }catch(error) {
+        console.error('Error fetching trending movies:', error);
+        return [];
     }
 }
